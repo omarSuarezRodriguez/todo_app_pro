@@ -1,0 +1,2 @@
+[33m1fd0118[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m V1.0 , funcional, con el homepage usando GetX y feature first y presentation/data, se puede visualizar el tìtulo y cambiar
+[33m6c36a83[m Se agrega proyecto, estructura base de Feature First, usando GetX e implementando presentation/data en cada modulo del feature first, GetStorage para la persistencia, más información en el readme

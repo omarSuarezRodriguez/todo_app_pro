@@ -10,7 +10,13 @@ class HomeController extends GetxController {
   HomeController(this.repository);
 
   final isLoading = false.obs;
-  final homeInfo = HomeInfoModel(title: '').obs;
+  final homeInfo = HomeInfoModel(
+    title: '',
+    totalTasks: 0,
+    pendingTasks: 0,
+    completedTasks: 0,
+  ).obs;
+
   final titleTextController = TextEditingController();
 
   @override
@@ -42,11 +48,15 @@ class HomeController extends GetxController {
 
     try {
       await repository.saveHomeTitle(newTitle);
-      homeInfo.value = homeInfo.value.copyWith(title: newTitle);
+      await loadHomeInfo();
       Get.snackbar('Éxito', 'Título guardado correctamente');
     } catch (e) {
       Get.snackbar('Error', 'No se pudo guardar el título');
     }
+  }
+
+  Future<void> refreshDashboard() async {
+    await loadHomeInfo();
   }
 
   @override
