@@ -7,7 +7,7 @@ class DeleteTaskDialog {
   }) {
     Get.defaultDialog(
       title: 'Eliminar tarea',
-      middleText: '¿Seguro que quieres eliminar "$taskTitle"?',
+      middleText: 'Confirmar eliminación de tarea "$taskTitle"',
       textCancel: 'Cancelar',
       textConfirm: 'Eliminar',
       onConfirm: () async {

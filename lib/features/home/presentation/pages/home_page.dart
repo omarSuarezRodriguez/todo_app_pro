@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../app/routes/app_routes.dart';
+import '../../../../core/constants/app_spacing.dart';
+import '../../../../core/widgets/dashboard_card.dart';
+import '../../../../core/widgets/section_title.dart';
 import '../controllers/home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -11,7 +14,7 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Base'),
+        title: const Text('ToDo Pro'),
         centerTitle: true,
       ),
       body: Obx(() {
@@ -26,12 +29,12 @@ class HomePage extends GetView<HomeController> {
         return RefreshIndicator(
           onRefresh: controller.refreshDashboard,
           child: ListView(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             children: [
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(AppSpacing.xl),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(24),
                   color: Theme.of(context).colorScheme.primaryContainer,
                 ),
                 child: Column(
@@ -41,35 +44,38 @@ class HomePage extends GetView<HomeController> {
                       info.title,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: AppSpacing.sm),
                     Text(
-                      'Organiza tu día y mantén el control de tus tareas.',
+                      'Organiza tu día, visualiza tu avance y mantén el control de tus tareas.',
                       style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    FilledButton.icon(
+                      onPressed: () async {
+                        await Get.toNamed(AppRoutes.tasks);
+                        controller.refreshDashboard();
+                      },
+                      icon: const Icon(Icons.arrow_forward),
+                      label: const Text('Abrir tareas'),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
-                'Resumen general',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.xl),
+              const SectionTitle(title: 'Resumen general'),
+              const SizedBox(height: AppSpacing.md),
               Row(
                 children: [
                   Expanded(
-                    child: _DashboardCard(
+                    child: DashboardCard(
                       label: 'Total',
                       value: info.totalTasks.toString(),
                       icon: Icons.list_alt,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: AppSpacing.md),
                   Expanded(
-                    child: _DashboardCard(
+                    child: DashboardCard(
                       label: 'Pendientes',
                       value: info.pendingTasks.toString(),
                       icon: Icons.schedule,
@@ -77,21 +83,23 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
-              _DashboardCard(
+              const SizedBox(height: AppSpacing.md),
+              DashboardCard(
                 label: 'Completadas',
                 value: info.completedTasks.toString(),
                 icon: Icons.task_alt,
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: AppSpacing.xxl),
+              const SectionTitle(title: 'Personalización'),
+              const SizedBox(height: AppSpacing.md),
               TextField(
                 controller: controller.titleTextController,
                 decoration: const InputDecoration(
                   labelText: 'Cambiar título principal',
-                  border: OutlineInputBorder(),
+                  hintText: 'Ej: Mi panel de productividad',
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.lg),
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
@@ -99,62 +107,10 @@ class HomePage extends GetView<HomeController> {
                   child: const Text('Guardar título'),
                 ),
               ),
-              const SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: () async {
-                    await Get.toNamed(AppRoutes.tasks);
-                    controller.refreshDashboard();
-                  },
-                  icon: const Icon(Icons.arrow_forward),
-                  label: const Text('Ir a tareas'),
-                ),
-              ),
             ],
           ),
         );
       }),
-    );
-  }
-}
-
-class _DashboardCard extends StatelessWidget {
-  final String label;
-  final String value;
-  final IconData icon;
-
-  const _DashboardCard({
-    required this.label,
-    required this.value,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          children: [
-            Icon(icon),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    value,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(label),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -6,7 +6,14 @@ class AppTheme {
       useMaterial3: true,
       colorSchemeSeed: Colors.blue,
       brightness: Brightness.light,
-      scaffoldBackgroundColor: Colors.white
+      scaffoldBackgroundColor: Colors.white,
+      cardTheme: const CardThemeData(
+        elevation: 0.8,
+        margin: EdgeInsets.zero,
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+      ),
     );
   }
 }

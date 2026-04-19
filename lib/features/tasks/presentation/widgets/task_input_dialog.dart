@@ -20,7 +20,7 @@ class TaskInputDialog {
         textCapitalization: TextCapitalization.sentences,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          hintText: 'Escribe aquí',
+          hintText: 'Escribe el título de la tarea',
         ),
       ),
       textCancel: 'Cancelar',

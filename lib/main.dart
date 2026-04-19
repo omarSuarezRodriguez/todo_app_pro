@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'App Base',
+      title: 'ToDo Pro',
       initialRoute: AppRoutes.home,
       getPages: AppPages.pages,
       theme: AppTheme.light,

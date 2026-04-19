@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/app_spacing.dart';
 import '../../data/models/task_model.dart';
 
 class TaskTile extends StatelessWidget {
@@ -19,11 +20,14 @@ class TaskTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 4,
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.xs,
         ),
         leading: Checkbox(
           value: task.isCompleted,
@@ -32,13 +36,13 @@ class TaskTile extends StatelessWidget {
         title: Text(
           task.title,
           style: TextStyle(
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             decoration: task.isCompleted ? TextDecoration.lineThrough : null,
             color: task.isCompleted ? Colors.grey : null,
           ),
         ),
         subtitle: Text(
-          task.isCompleted ? 'Completada' : 'Pendiente',
+          task.isCompleted ? 'Estado: completada' : 'Estado: pendiente',
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,

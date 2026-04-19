@@ -54,8 +54,8 @@ class TasksController extends GetxController {
     await saveTasks();
 
     AppSnackbar.success(
-      title: 'Tarea creada',
-      message: 'La tarea se agregó correctamente.',
+      title: 'Tarea agregada',
+      message: 'La tarea se guardó correctamente.',
     );
   }
 

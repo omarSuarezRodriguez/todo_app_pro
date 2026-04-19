@@ -21,7 +21,7 @@ class HomeLocalDataSource {
     final pendingTasks = tasks.where((task) => !task.isCompleted).length;
 
     return HomeInfoModel(
-      title: storedTitle ?? 'Bienvenido a tu app base',
+      title: storedTitle ?? 'Bienvenido a ToDo Pro',
       totalTasks: totalTasks,
       pendingTasks: pendingTasks,
       completedTasks: completedTasks,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_app_pro/core/constants/app_spacing.dart';
 
 import '../controllers/tasks_controller.dart';
 import '../widgets/task_input_dialog.dart';
 import '../widgets/task_tile.dart';
 import '../widgets/delete_task_dialog.dart';
+
 
 class TasksPage extends GetView<TasksController> {
   const TasksPage({super.key});
@@ -12,7 +14,7 @@ class TasksPage extends GetView<TasksController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tareas'), centerTitle: true),
+      appBar: AppBar(title: const Text('Mis Tareas'), centerTitle: true),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           TaskInputDialog.show(
@@ -21,7 +23,7 @@ class TasksPage extends GetView<TasksController> {
           );
         },
         icon: const Icon(Icons.add),
-        label: const Text('Nueva'),
+        label: const Text('Agregar'),
       ),
       body: Obx(() {
         if (controller.isLoading.value) {
@@ -186,21 +188,31 @@ class _EmptyTasksState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppSpacing.xxl),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.task_alt, size: 64, color: Colors.grey[400]),
-            const SizedBox(height: 16),
-            const Text(
-              'No hay tareas para mostrar',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Icon(
+              Icons.task_alt,
+              size: 72,
+              color: Colors.grey[400],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.lg),
+            const Text(
+              'Todo está en orden',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm),
             Text(
-              'Agrega una nueva tarea o cambia el filtro actual.',
+              'No hay tareas para mostrar en este momento. Agrega una nueva tarea o cambia el filtro actual.',
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
+              style: TextStyle(
+                color: Colors.grey[600],
+                height: 1.4,
+              ),
             ),
           ],
         ),
